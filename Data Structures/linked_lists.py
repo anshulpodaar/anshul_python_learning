@@ -135,6 +135,8 @@ class LinkedList:
         return temp
 
     def reverse(self):
+        if self.length <= 1:
+            return False
         temp = self.head
         self.head = self.tail
         self.tail = temp
