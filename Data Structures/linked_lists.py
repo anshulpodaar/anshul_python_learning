@@ -3,16 +3,17 @@ Linked List Constructor definition
 """
 
 import typing
+from typing import Optional
 
 
 class ListNode:
-    def __init__(self, value):
+    def __init__(self, value=0, next=None):
         self.value = value
-        self.next = None
+        self.next = next
 
 
 class LinkedList:
-    def __init__(self, value):
+    def __init__(self, value=Optional):
         new_node = ListNode(value)
         self.head = new_node
         self.tail = new_node
@@ -149,6 +150,39 @@ class LinkedList:
             temp = after
         return True
 
+    def find_middle_node(self):
+        if self.head is None:
+            return None
+        slow = self.head
+        fast = self.head
+        while fast and fast.next:
+            fast = fast.next.next
+            slow = slow.next
+        return slow
+
+    def middleNode(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if head is None:
+            return None
+        slow = fast = head
+        while fast and fast.next:
+            fast = fast.next.next
+            slow = slow.next
+        return slow
+
+    def has_loop(self):
+        if self.head is None:
+            return False
+        slow = self.head
+        fast = self.head
+        while fast.next:
+            fast = fast.next.next
+            slow = slow.next
+            if fast == slow:
+                return True
+        return False
+
+
+
 
 print("##################################################")
 
@@ -270,6 +304,25 @@ print("##################################################")
 print("***** reverse method *****")
 print(my_linked_list.reverse())
 my_linked_list.print_list()
+print()
+
+print("##################################################")
+
+print("***** find_middle_node method *****")
+my_linked_list.print_list()
+print("Middle Node:", my_linked_list.find_middle_node().value)
+print()
+my_linked_list.append(6)
+my_linked_list.print_list()
+print("Middle Node:", my_linked_list.find_middle_node().value)
+print()
+
+print("##################################################")
+
+print("***** middleNode method *****")
+ll1 = LinkedList()
+print("Middle Node:", ll1.middleNode(head = [1,2,3,4,5]).value)
+print("Middle Node:", ll1.middleNode(head=[1,2,3,4,5,6]).value)
 print()
 
 print("##################################################")
