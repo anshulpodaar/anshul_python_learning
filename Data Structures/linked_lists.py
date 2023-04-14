@@ -25,6 +25,11 @@ class LinkedList:
             print(temp.value)
             temp = temp.next
 
+    def make_empty(self):
+        self.head = None
+        self.tail = None
+        self.length = 0
+
     def append(self, value):
         new_node = ListNode(value)
         if self.head is None:
