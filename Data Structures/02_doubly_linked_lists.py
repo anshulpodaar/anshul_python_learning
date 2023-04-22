@@ -6,15 +6,16 @@ import typing
 from typing import Optional
 
 
-class ListNode:
-    def __init__(self, value=0, next=None):
+class Node:
+    def __init__(self, value=0, next=None, prev=None):
         self.value = value
         self.next = next
+        self.prev = prev
 
 
-class LinkedList:
+class DoublyLinkedList:
     def __init__(self, value=Optional):
-        new_node = ListNode(value)
+        new_node = Node(value)
         self.head = new_node
         self.tail = new_node
         self.length = 1
@@ -31,29 +32,31 @@ class LinkedList:
         self.length = 0
 
     def append(self, value):
-        new_node = ListNode(value)
+        new_node = Node(value)
         if self.head is None:
             self.head = new_node
             self.tail = new_node
         else:
             self.tail.next = new_node
+            new_node.prev = self.tail
             self.tail = new_node
         self.length += 1
         return True
 
     def append2(self, value):
-        new_node = ListNode(value)
+        new_node = Node(value)
         if self.head is None:
             self.head = new_node
             self.tail = new_node
         else:
             self.tail.next = new_node
+            new_node.prev = self.tail
             self.tail = new_node
         self.length += 1
         return self
 
     def prepend(self, value):
-        new_node = ListNode(value)
+        new_node = Node(value)
         if self.head is None:
             self.head = new_node
             self.tail = new_node
@@ -130,7 +133,7 @@ class LinkedList:
             return self.prepend(value)
         elif index == self.length:
             return self.append(value)
-        new_node = ListNode(value)
+        new_node = Node(value)
         temp = self.get(index-1)
         new_node.next = temp.next
         temp.next = new_node
@@ -219,7 +222,7 @@ class LinkedList:
             return None
         if m >= self.length or n >= self.length or m > n:
             return None
-        dummy = ListNode(0)
+        dummy = Node(0)
         dummy.next = self.head
         self.head = dummy
         prev = self.head
@@ -261,12 +264,12 @@ class LinkedList:
         while temp:
             if temp.value < x:
                 if not ll1:
-                    ll1 = LinkedList(temp.value)
+                    ll1 = DoublyLinkedList(temp.value)
                 else:
                     ll1.append(temp.value)
             else:
                 if not ll2:
-                    ll2 = LinkedList(temp.value)
+                    ll2 = DoublyLinkedList(temp.value)
                 else:
                     ll2.append(temp.value)
             temp = temp.next
@@ -295,7 +298,7 @@ class LinkedList:
 print("##################################################")
 
 print("***** Initialize LinkedList *****")
-my_linked_list = LinkedList(1)
+my_linked_list = DoublyLinkedList(1)
 print(my_linked_list.head.value)
 print()
 
@@ -436,7 +439,7 @@ print("##################################################")
 print("##################################################")
 
 print("***** has_loop method *****")
-ll2 = LinkedList(1)
+ll2 = DoublyLinkedList(1)
 ll2.append2(2).append2(3).append2(4).append2(5).append2(6).append2(7).append2(8).append2(9)
 ll2.print_list()
 
@@ -454,7 +457,7 @@ print(ll2.find_kth_from_end(3).value)
 print(ll2.find_kth_from_end(4).value)
 print()
 
-ll3 = LinkedList(1)
+ll3 = DoublyLinkedList(1)
 ll3.append2(2).append2(3).append2(4).append2(5)
 ll3.print_list()
 print()
@@ -504,7 +507,7 @@ print()
 
 print("##################################################")
 
-ll4 = LinkedList(3)
+ll4 = DoublyLinkedList(3)
 ll4.append2(5).append2(8).append2(10).append2(2).append2(1)
 
 print("***** partition_list method *****")
@@ -518,7 +521,7 @@ print()
 
 print("##################################################")
 
-ll5 = LinkedList(3).append2(5).append2(8).append2(9).append2(8).append2(1).append2(3)
+ll5 = DoublyLinkedList(3).append2(5).append2(8).append2(9).append2(8).append2(1).append2(3)
 
 print("***** remove_duplicates method *****")
 ll5.print_list()
