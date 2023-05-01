@@ -6,7 +6,7 @@ import typing
 from typing import Optional
 
 
-class Node:
+class ListNode:
     def __init__(self, value=0, next=None):
         self.value = value
         self.next = next
@@ -14,7 +14,7 @@ class Node:
 
 class LinkedList:
     def __init__(self, value=Optional):
-        new_node = Node(value)
+        new_node = ListNode(value)
         self.head = new_node
         self.tail = new_node
         self.length = 1
@@ -31,7 +31,7 @@ class LinkedList:
         self.length = 0
 
     def append(self, value):
-        new_node = Node(value)
+        new_node = ListNode(value)
         if self.head is None:
             self.head = new_node
             self.tail = new_node
@@ -41,19 +41,8 @@ class LinkedList:
         self.length += 1
         return True
 
-    def append2(self, value):
-        new_node = Node(value)
-        if self.head is None:
-            self.head = new_node
-            self.tail = new_node
-        else:
-            self.tail.next = new_node
-            self.tail = new_node
-        self.length += 1
-        return self
-
     def prepend(self, value):
-        new_node = Node(value)
+        new_node = ListNode(value)
         if self.head is None:
             self.head = new_node
             self.tail = new_node
@@ -130,7 +119,7 @@ class LinkedList:
             return self.prepend(value)
         elif index == self.length:
             return self.append(value)
-        new_node = Node(value)
+        new_node = ListNode(value)
         temp = self.get(index-1)
         new_node.next = temp.next
         temp.next = new_node
@@ -219,7 +208,7 @@ class LinkedList:
             return None
         if m >= self.length or n >= self.length or m > n:
             return None
-        dummy = Node(0)
+        dummy = ListNode(0)
         dummy.next = self.head
         self.head = dummy
         prev = self.head
