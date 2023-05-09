@@ -41,7 +41,7 @@ class DoublyLinkedList:
             new_node.prev = self.tail
             self.tail = new_node
         self.length += 1
-        return True
+        return self
 
     def prepend(self, value):
         new_node = ListNode(value)
@@ -137,22 +137,22 @@ class DoublyLinkedList:
         self.length -= 1
         return temp
 
-    def reverse(self):
-        if self.length == 0:
-            return False
-        elif self.length == 1:
-            return True
-        temp = self.head
-        self.head = self.tail
-        self.tail = temp
-        after = temp.next
-        before = None
-        for _ in range(self.length):
-            after = temp.next
-            temp.next = before
-            before = temp
-            temp = after
-        return True
+    # def reverse(self):
+    #     if self.length == 0:
+    #         return False
+    #     elif self.length == 1:
+    #         return True
+    #     temp = self.head
+    #     self.head = self.tail
+    #     self.tail = temp
+    #     after = temp.next
+    #     before = None
+    #     for _ in range(self.length):
+    #         after = temp.next
+    #         temp.next = before
+    #         before = temp
+    #         temp = after
+    #     return True
 
     # def find_middle_node(self):
     #     if self.head is None:
@@ -295,28 +295,61 @@ class DoublyLinkedList:
         else:
             forward = self.head
             reverse = self.tail
-            for _ in range(self.length/2 + 1):
+            for _ in range(int(self.length/2) + 1):
                 if forward.value != reverse.value:
                     return False
                 forward = forward.next
                 reverse = reverse.prev
         return True
 
-    def swap_pairs(self):
+    def swap_pairs2(self):
         if self.length <= 1:
             return False
         else:
             before = self.head
             after = self.head.next
+
             while after:
                 temp = before.prev
                 before.prev = after
                 before.next = after.next
+                if before.next:
+                    before.next.prev = before
                 after.prev = temp
                 after.next = before
                 before = before.next
                 after = before.next
+
+            self.head = self.head.prev
+            self.tail = self.tail.next
+        return True
+
+    def swap_pairs(self):
+        if self.length <= 1:
+            return False
+        else:
+            dummy_node = ListNode()
+            dummy_node.next = self.head
+            before = dummy_node
+            self.head = dummy_node
+            while before.next and before.next.next:
+                one = before.next
+                two = before.next.next
+                before.next = two
+                one.next = two.next
+                two.next = one
+                two.prev = before
+                one.prev = two
+                if one.next:
+                    one.next.prev = one
+                before = before.next.next
+            self.head = dummy_node.next
+            self.head.prev = None
+            dummy_node.next = None
+            if self.tail.next:
+                self.tail = self.tail.next
             return True
+
 
 
 
@@ -440,12 +473,12 @@ print()
 
 print("##################################################")
 
-print("***** reverse method *****")
-print(my_linked_list.reverse())
-my_linked_list.print_list()
-print()
-
-print("##################################################")
+# print("***** reverse method *****")
+# print(my_linked_list.reverse())
+# my_linked_list.print_list()
+# print()
+#
+# print("##################################################")
 
 # print("***** find_middle_node method *****")
 # my_linked_list.print_list()
@@ -564,6 +597,26 @@ print("***** swap_first_last method *****")
 my_linked_list.print_list()
 print()
 print(my_linked_list.swap_first_last())
+my_linked_list.print_list()
+print()
+
+print("##################################################")
+
+print("***** is_palindrome method *****")
+my_linked_list.print_list()
+print()
+print(my_linked_list.is_palindrome())
+my_linked_list.print_list()
+print()
+
+print("##################################################")
+
+print("***** swap_pairs method *****")
+my_linked_list = DoublyLinkedList(1)
+my_linked_list.append(2).append(3).append(4)
+my_linked_list.print_list()
+print()
+print(my_linked_list.swap_pairs())
 my_linked_list.print_list()
 print()
 
