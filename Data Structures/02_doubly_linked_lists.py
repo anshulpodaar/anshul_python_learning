@@ -1,5 +1,5 @@
 """
-Linked List Constructor definition
+Doubly Linked List
 """
 
 import typing
