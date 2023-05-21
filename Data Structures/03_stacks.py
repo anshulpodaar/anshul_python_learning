@@ -94,3 +94,130 @@ my_stack.print_stack()
 print()
 
 print("##################################################")
+print("##################################################")
+print("##################################################")
+
+
+class Stack_using_List:
+    def __init__(self):
+        self.stack_list = []
+
+    def print_stack(self):
+        for i in range(len(self.stack_list)-1, -1, -1):
+            print(self.stack_list[i])
+
+    def is_empty(self):
+        return len(self.stack_list) == 0
+
+    def peek(self):
+        if self.is_empty():
+            return None
+        else:
+            return self.stack_list[-1]
+
+    def size(self):
+        return len(self.stack_list)
+
+    def push(self, value):
+        self.stack_list.append(value)
+
+    def pop(self):
+        if len(self.stack_list) == 0:
+            return None
+        else:
+            temp = self.stack_list.pop()
+            return temp
+
+
+
+
+print("##################################################")
+print()
+
+my_stack = Stack()
+my_stack.push(1)
+my_stack.push(2)
+my_stack.push(3)
+
+print("Stack before pop():")
+my_stack.print_stack()
+
+print("\nPopped node:")
+print(my_stack.pop())
+
+print("\nStack after pop():")
+my_stack.print_stack()
+
+print("##################################################")
+
+def is_balanced_parentheses(s: str) -> bool:
+    parentheses_map = {")": "(", "}": "{", "]": "["}
+    check_list = Stack_using_List()
+    for item in s:
+        if item in parentheses_map.values():
+            check_list.push(item)
+        elif item in parentheses_map.keys():
+            if check_list.is_empty() or check_list.pop() != parentheses_map[item]:
+                return False
+    if check_list.is_empty():
+        return True
+    else:
+        return False
+
+
+###############################################
+
+
+balanced_parentheses = '((()))'
+unbalanced_parentheses = '((())))'
+
+print(is_balanced_parentheses(balanced_parentheses))
+print(is_balanced_parentheses(unbalanced_parentheses))
+
+###############################################
+
+def reverse_string(s:str) -> str:
+    my_stack = Stack_using_List()
+    for letter in s:
+        my_stack.push(letter)
+    new_str = ""
+    while not my_stack.is_empty():
+        new_str = new_str + my_stack.pop()
+    return new_str
+
+my_string = 'hello'
+print (reverse_string(my_string))
+
+###############################################
+
+def sort_stack(unsorted_stack:Stack)->Stack:
+    sorted_stack = Stack_using_List()
+    while not unsorted_stack.is_empty():
+        temp = unsorted_stack.pop()
+        while not sorted_stack.is_empty() and sorted_stack.peek() > temp:
+            temp2 = sorted_stack.pop()
+            unsorted_stack.push(temp2)
+        sorted_stack.push(temp)
+    while not sorted_stack.is_empty():
+        temp = sorted_stack.pop()
+        unsorted_stack.push(temp)
+    return unsorted_stack
+
+###############################################
+
+my_stack = Stack_using_List()
+my_stack.push(3)
+my_stack.push(1)
+my_stack.push(5)
+my_stack.push(4)
+my_stack.push(2)
+
+print("Stack before sort_stack():")
+my_stack.print_stack()
+
+sort_stack(my_stack)
+
+print("\nStack after sort_stack:")
+my_stack.print_stack()
+
+###############################################
