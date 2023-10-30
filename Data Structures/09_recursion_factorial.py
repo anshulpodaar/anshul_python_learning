@@ -1,5 +1,6 @@
-# Recursion
-### Factorials
+"""
+Recursion - Factorials
+"""
 
 
 def factorial(n):
@@ -8,4 +9,8 @@ def factorial(n):
     return n * factorial(n-1)
 
 
-print(factorial(6))
+def _main():
+    print(factorial(6))
+
+if __name__ == "__main__":
+    _main()

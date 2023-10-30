@@ -50,31 +50,36 @@ class BinarySearchTree:
         return False
 
 
-print("\n#########################\n")
+def _main():
+    print("\n#########################\n")
 
-my_tree = BinarySearchTree()
-print(my_tree.root)
+    my_tree = BinarySearchTree()
+    print(my_tree.root)
 
-my_tree.insert(2)
-my_tree.insert(1)
-my_tree.insert(5)
-my_tree.insert(3)
+    my_tree.insert(2)
+    my_tree.insert(1)
+    my_tree.insert(5)
+    my_tree.insert(3)
 
-print(my_tree.root.value)
-print(my_tree.root.left.value)
-print(my_tree.root.right.value)
-print(my_tree.root.right.left.value)
-# print(my_tree.root.right.right.value)
+    print(my_tree.root.value)
+    print(my_tree.root.left.value)
+    print(my_tree.root.right.value)
+    print(my_tree.root.right.left.value)
+    # print(my_tree.root.right.right.value)
 
-my_tree = BinarySearchTree()
-print(my_tree.contains(27))
-my_tree.insert(47)
-my_tree.insert(21)
-my_tree.insert(76)
-my_tree.insert(18)
-my_tree.insert(27)
-my_tree.insert(52)
-my_tree.insert(82)
+    my_tree = BinarySearchTree()
+    print(my_tree.contains(27))
+    my_tree.insert(47)
+    my_tree.insert(21)
+    my_tree.insert(76)
+    my_tree.insert(18)
+    my_tree.insert(27)
+    my_tree.insert(52)
+    my_tree.insert(82)
 
-print(my_tree.contains(27))
-print(my_tree.contains(17))
+    print(my_tree.contains(27))
+    print(my_tree.contains(17))
+
+
+if __name__ == "__main__":
+    _main()
