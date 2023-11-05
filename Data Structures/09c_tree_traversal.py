@@ -1,6 +1,15 @@
 """
 Binary Search Tree - Tree traversal
+- Breadth-First_Search (BFS)
+- Depth-First-Search (DFS)
+    - DFS PreOrder
+    - DFS PostOrder
+    - DFS InOrder
 """
+
+import typing
+
+from typing import List, Union
 
 
 class Node:
@@ -14,7 +23,7 @@ class BinarySearchTree:
     def __init__(self):
         self.root = None
 
-    def insert(self, value: int):
+    def insert(self, value: int) -> None:
         new_node = Node(value)
         if self.root is None:
             self.root = new_node
@@ -49,7 +58,7 @@ class BinarySearchTree:
                 return True
         return False
 
-    def bfs(self):
+    def bfs(self) -> List:
         current_node = self.root
         queue = []
         results = []
@@ -65,7 +74,7 @@ class BinarySearchTree:
 
         return results
 
-    def dfs_pre_order(self):
+    def dfs_pre_order(self) -> List:
         results = []
 
         def traverse(current_node):
@@ -78,7 +87,7 @@ class BinarySearchTree:
         traverse(self.root)
         return results
 
-    def dfs_post_order(self):
+    def dfs_post_order(self) -> List:
         results = []
 
         def traverse(current_node):
@@ -91,7 +100,7 @@ class BinarySearchTree:
         traverse(self.root)
         return results
 
-    def dfs_in_order(self):
+    def dfs_in_order(self) -> List:
         results = []
 
         def traverse(current_node):
@@ -103,6 +112,29 @@ class BinarySearchTree:
 
         traverse(self.root)
         return results
+
+    def is_valid_bst(self) -> bool:
+        results = self.dfs_in_order()
+
+        for i in range(len(results) - 1):
+            if results[i] >= results[i+1]:
+                return False
+        return True
+
+    def kth_smallest(self, k: int) -> Union[int, None]:
+        stack = []
+        node = self.root
+
+        while stack or node:
+            while node:
+                stack.append(node)
+                node = node.left
+            node = stack.pop()
+            k -= 1
+            if k == 0:
+                return node.value
+            node = node.right
+        return None
 
 
 def _tree_traversal():
@@ -160,6 +192,33 @@ def _tree_traversal():
     print("-------------------------")
 
     print(my_tree.dfs_in_order()) # [18, 21, 27, 47, 52, 76, 82]
+    print("=========================")
+
+    #########################
+
+    # IsValid BST
+    print("\n=========================")
+    print("IsValid BST")
+    print("-------------------------")
+
+    print(my_tree.is_valid_bst()) # True
+    print("=========================")
+
+    #########################
+
+    # Kth Smallest Node
+
+    print("\n=========================")
+    print("Kth Smallest Node")
+    print("-------------------------")
+
+    print(f"1st smallest node: {my_tree.kth_smallest(1)}") # 27
+    print(f"2nd smallest node: {my_tree.kth_smallest(2)}")  # 27
+    print(f"3rd smallest node: {my_tree.kth_smallest(3)}")  # 27
+    print(f"4th smallest node: {my_tree.kth_smallest(4)}")  # 27
+    print(f"5th smallest node: {my_tree.kth_smallest(5)}")  # 27
+    print(f"6th smallest node: {my_tree.kth_smallest(6)}")  # 27
+    print(f"7th smallest node: {my_tree.kth_smallest(7)}")  # 27
     print("=========================")
 
     #########################
