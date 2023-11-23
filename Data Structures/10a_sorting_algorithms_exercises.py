@@ -58,22 +58,6 @@ def insertion_sort(my_list: List) -> List:
             j -= 1
     return my_list
 
-def merge_sort(my_list: List) -> List:
-    """
-    Sorts the list by
-    :param my_list: List of integers
-    :return: my_list: List of integers (sorted)
-    """
-    pass
-
-def quick_sort(my_list: List) -> List:
-    """
-    Sorts the list by
-    :param my_list: List of integers
-    :return: my_list: List of integers (sorted)
-    """
-    pass
-
 
 class ListNode:
     def __init__(self, value=0, next=None):
@@ -127,28 +111,10 @@ def _sort():
     #########################
     # Insertion Sort
     print("\n=========================")
-    print("INSERION SORT")
+    print("INSERTION SORT")
     # print("-------------------------")
 
     print(insertion_sort([4, 2, 6, 5, 1, 3]))
-    print("=========================")
-
-    #########################
-    # Merge Sort
-    print("\n=========================")
-    print("MERGE SORT")
-    # print("-------------------------")
-
-    print(merge_sort([4, 2, 6, 5, 1, 3]))
-    print("=========================")
-
-    #########################
-    # Quick Sort
-    print("\n=========================")
-    print("QUICK SORT")
-    # print("-------------------------")
-
-    print(quick_sort([4, 2, 6, 5, 1, 3]))
     print("=========================")
 
     #########################
